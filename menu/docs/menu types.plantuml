@@ -1,0 +1,25 @@
+@startuml meun types
+
+state hasQuitOption <<choice>>
+state isIterative <<choice>>
+state isDynamic <<choice>>
+state hasSubmenus <<choice>>
+
+[*] --> hasQuitOption 
+hasQuitOption --> WITH_QUIT_OPTION : [menu with quit option]
+hasQuitOption --> WITHOUT_QUIT_OPTION : [menu without quit option]
+
+[*] --> isIterative
+isIterative --> ITERATIVE_MENU : [menu displayed till quit option]
+isIterative --> SINGLE_ACTION_MENU : [menu closed after any option execution]
+
+[*] --> isDynamic
+isDynamic --> DYNAMIC_MENU : [each time menu is displayed options offered could change]
+isDynamic --> STATIC_MENU : [menu offers always the same options]
+
+[*] --> hasSubmenus
+hasSubmenus --> WITH_SUBMENUS : [at least one option inits other menu]
+hasSubmenus --> WITHOUT_SUBMENUS : [none option inits other menu]
+
+
+@enduml

@@ -1,0 +1,168 @@
+@startuml menu
+
+abstract class Menu #LightYellow{
+    - title 
+    - options
+
+    + constructor(title)
+    + interact()
+    # {abstract} setupOptions_()
+    # addOption_(option)
+    # executeOption_()
+    # hasOption_(option)
+    # clearOptions_()
+    - write()
+    - readOption()
+    # writeTrace_()
+}
+Menu *--> "+" Option
+Menu ..> Console
+
+abstract class QuitMenu #LightYellow{
+    - quitOption
+
+    + constructor(title)
+    # setupOptions_()
+    # {abstract} setupModelOptions_()
+    # isQuitExecuted_()
+    
+}
+Menu <|-- QuitMenu
+QuitMenu *--> QuitOption
+
+abstract class DynamicIterativeMenu #LightYellow{
+    
+    + constructor(title)
+    # interact()    
+    # executeIteration_()
+    # {abstract} setupModelOptions_()
+    
+}
+QuitMenu <|-- DynamicIterativeMenu
+
+abstract class StaticIterativeMenu #LightYellow{
+    
+    + constructor(title)
+    # interact()    
+    # executeIteration_()
+    # {abstract} setupModelOptions_()
+}
+DynamicIterativeMenu <|-- StaticIterativeMenu
+
+'' Option
+
+abstract class Option #LightPink{
+    - title
+
+    + constructor(title)
+    + {abstract} interact()
+    + write(position)
+}
+Option ..> Console
+
+class QuitOption #LightSalmon{
+    - executed
+
+    + constructor()
+    + interact()
+    + isQuitExecuted()
+}
+Option <|-- QuitOption
+
+'' Model's Menus
+class MenuModel as "<NoDynamic_NoIterative_NoQuitOption>\nMenuModel" #LightCyan {
+    - model
+
+    + constructor(model)
+    # setupOptions_()
+}
+Menu <|-- MenuModel
+MenuModel --> Model
+
+class QuitMenuModel as "<NoDynamic_NoIterative_QuitOption>\nQuitMenuModel" #LightCyan {
+    - model
+
+    + constructor(model)
+    # setupModelOptions_()
+}
+QuitMenu <|-- QuitMenuModel
+QuitMenuModel --> Model
+
+class DynamicIterativeMenuModel as "<Dynamic_Iterative_QuitOption>\nDynamicIterativeMenuModel" #LightCyan {
+    - model
+
+    + constructor(model)
+    # setupModelOptions_()
+}
+DynamicIterativeMenu <|-- DynamicIterativeMenuModel
+DynamicIterativeMenuModel --> Model
+DynamicIterativeMenuModel ..> PriorizeTaskModelOption
+
+class StaticIterativeMenuModel as "<WithSubMenu_NoDynamic_Iterative_QuitOption>\nWithSubMenuStaticIterativeMenuModel" #LightCyan {
+    - model
+
+    + constructor(model)
+    # setupModelOptions_()
+}
+StaticIterativeMenu <|-- StaticIterativeMenuModel
+StaticIterativeMenuModel --> Model
+StaticIterativeMenuModel --> PriorizeTasksModelOption
+
+'' Model's Options
+abstract class ModelOption #LimeGreen{
+    - model    
+
+    + constructor(model, title)
+    + {abstract} interact()
+    # getModel_()
+}
+Option <|-- ModelOption
+ModelOption --> Model
+
+class UpdateNameModelOption as "<Simple Option>\nUpdateNameModelOption" #LightGreen{
+    + constructor(model)
+    + interact()
+}
+ModelOption <|-- UpdateNameModelOption
+
+class ShowDetailsModelOption as "<Simple Option>\nShowDetailsModelOption" #LightGreen{
+    + constructor(model)
+    + interact()
+}
+ModelOption <|-- ShowDetailsModelOption
+
+class ShowTasksModelOption as "<Simple Option>\nShowTasksModelOption" #LightGreen{
+    + constructor(model)
+    + interact()
+}
+ModelOption <|-- ShowTasksModelOption
+
+class PriorizeTaskModelOption as "<Simple Option>\nPriorizeTaskModelOption" #LightGreen{
+    - index
+
+    + constructor(model, index)
+    + interact()
+}
+ModelOption <|-- PriorizeTaskModelOption
+
+class PriorizeTasksModelOption as "<InitSubmenu>\nPriorizeTasksModelOption" #GreenYellow{    
+    
+    + constructor(model)
+    + interact()
+}
+ModelOption <|-- PriorizeTasksModelOption
+PriorizeTasksModelOption ..> DynamicIterativeMenuModel
+
+'' Model
+
+class Model #LightBlue {
+    - name
+    - adress
+    - tasks
+
+    + setName(name)
+    + getDetails()
+    + getTasks()
+}
+
+@enduml
