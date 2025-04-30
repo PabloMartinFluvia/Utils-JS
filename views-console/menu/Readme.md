@@ -12,4 +12,4 @@ Menus implemented with inheritance. Dessign goal is <b>maximize reusable code</b
 4. Dynamic Iterative Menu: iterative menu like Static, but options offered in each iteration can change. Quit option remains always.
 5. X Menu with submenu: iterative menu, but one option implies init other (sub)menu. When the submenu ends this menu continues.
 
-![design](../out/menu/docs/analisis/menu.svg)
+![design](../../out/menu/docs/analisis/menu.svg)
