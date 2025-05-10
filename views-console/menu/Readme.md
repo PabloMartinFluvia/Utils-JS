@@ -1,4 +1,7 @@
 # Menu
+- Menu templates for extend from.
+- Dependencies:
+    - console-mpds (npm module)
 
 ## Versions
 * [Example](#example)

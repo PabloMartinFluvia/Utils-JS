@@ -156,10 +156,10 @@ export class StaticIterativeMenu extends DynamicIterativeMenu {
 
 //////////////////// Following code as implementation example ////////////////
 
+/*
 
 // Model
 
-/*
 class Model {
     #name;
     #adress;
@@ -347,5 +347,3 @@ class WithSubMenusStaticIterativeMenuModel extends StaticIterativeMenu {
 new WithSubMenusStaticIterativeMenuModel(new Model).interact();
 
 */
-
-
