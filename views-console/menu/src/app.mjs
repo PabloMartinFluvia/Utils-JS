@@ -1,8 +1,8 @@
-const { Console } = require("console-mpds");
+import { Console } from "console-mpds";
 
 
 // options
-class Option {
+export class Option {
     static console = new Console();
 
     #title;
@@ -19,7 +19,7 @@ class Option {
 
 }
 
-class QuitOption extends Option{
+export class QuitOption extends Option{
 
     #executed;
 
@@ -38,7 +38,7 @@ class QuitOption extends Option{
 }
 
 // menus
-class Menu {
+export class Menu {
     #title
     #options
 
@@ -93,7 +93,7 @@ class Menu {
 
 }
 
-class QuitMenu extends Menu{
+export class QuitMenu extends Menu{
 
     #quitOption;
 
@@ -116,7 +116,7 @@ class QuitMenu extends Menu{
     }
 }
 
-class DynamicIterativeMenu extends QuitMenu {
+export class DynamicIterativeMenu extends QuitMenu {
     constructor(title) {
         super(title);
     }
@@ -136,7 +136,7 @@ class DynamicIterativeMenu extends QuitMenu {
     setupModelOptions_(){} // abstract 
 }
 
-class StaticIterativeMenu extends DynamicIterativeMenu {
+export class StaticIterativeMenu extends DynamicIterativeMenu {
 
     constructor(title) {
         super(title);
@@ -154,9 +154,12 @@ class StaticIterativeMenu extends DynamicIterativeMenu {
     setupModelOptions_(){} // abstract    
 }
 
-////////////////////////////////////////
+//////////////////// Following code as implementation example ////////////////
+
+
 // Model
 
+/*
 class Model {
     #name;
     #adress;
@@ -343,5 +346,6 @@ class WithSubMenusStaticIterativeMenuModel extends StaticIterativeMenu {
 
 new WithSubMenusStaticIterativeMenuModel(new Model).interact();
 
+*/
 
 
